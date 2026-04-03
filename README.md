@@ -13,13 +13,34 @@
 
 ## 安装方法
 
+**1. 安装主 Skill**
+
 ```bash
 # 进入你的 skills 目录
 cd ~/.claude/skills/
 
 # 克隆这个仓库
-git clone https://github.com/你的用户名/super-slides.git
+git clone https://github.com/Jianing1117/super-slides.git
 ```
+
+**2. 安装依赖 Skills（可选）**
+
+如果你想使用 Excel 数据或导出 PPT/PDF，需要单独安装以下 skills：
+
+```bash
+cd ~/.claude/skills/
+
+# Excel/CSV 数据读取
+git clone https://github.com/anthropics/claude-code-skills.git xlsx-temp && mv xlsx-temp/skills/xlsx . && rm -rf xlsx-temp
+
+# PPT 导出
+git clone https://github.com/anthropics/claude-code-skills.git pptx-temp && mv pptx-temp/skills/pptx . && rm -rf pptx-temp
+
+# PDF 导出
+git clone https://github.com/anthropics/claude-code-skills.git pdf-temp && mv pdf-temp/skills/pdf . && rm -rf pdf-temp
+```
+
+> **注意**：如果不安依赖 skills，仍然可以使用 Super Slides 的核心功能（生成 HTML 演示稿），只是无法读取 Excel 数据和导出 PPT/PDF。
 
 ## 使用方法
 
