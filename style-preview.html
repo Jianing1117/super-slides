@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Super Slides 风格重组预览</title>
+  <title>Super Slides 风格库 (30种)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bodoni+Moda:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500&family=Fraunces:wght@700;900&family=IBM+Plex+Sans:wght@300;400&family=Manrope:wght@400;500;800&family=Outfit:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@400;500&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Work+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bodoni+Moda:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Cormorant:wght@400;600&family=DM+Sans:wght@400;500;700&family=Fraunces:wght@700;900&family=IBM+Plex+Sans:wght@300;400&family=Inter:wght@300;400;500;800;900&family=Manrope:wght@400;500;800&family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;500;600&family=Nunito:wght@400;500;700;800&family=Open+Sans:wght@400;600&family=Orbitron:wght@700;900&family=Outfit:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Playfair+Display:wght@400;700;900&family=Rajdhani:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Work+Sans:wght@400;500&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -14,6 +14,7 @@
       background: #1a1a1a;
       color: #fff;
       padding: 40px 20px;
+      line-height: 1.5;
     }
     h1 {
       text-align: center;
@@ -27,40 +28,41 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
-      max-width: 1400px;
+      max-width: 1600px;
       margin: 0 auto;
     }
     .card {
       border-radius: 12px;
       overflow: hidden;
-      aspect-ratio: 16/9;
+      aspect-ratio: 16/10;
       position: relative;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
     }
     .card-inner {
       width: 100%;
       height: 100%;
-      padding: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
     }
     .card-number {
-      font-size: 10px;
+      font-size: 11px;
       opacity: 0.6;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       letter-spacing: 1px;
+      font-family: 'Space Mono', monospace;
     }
     .card-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .card-vibe {
       font-size: 11px;
@@ -69,19 +71,19 @@
     }
     .card-colors {
       display: flex;
-      gap: 6px;
-      margin-top: 12px;
+      gap: 4px;
+      margin-top: 10px;
     }
     .color-dot {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.2);
     }
     .card-fonts {
       font-size: 9px;
       opacity: 0.5;
-      margin-top: 8px;
+      margin-top: 6px;
     }
     .section-title {
       grid-column: 1 / -1;
@@ -112,277 +114,325 @@
     .section-friendly { border-color: #98d4bb; color: #98d4bb; }
     .section-minimal { border-color: #888; color: #aaa; }
 
-    /* === 科技未来 === */
-    .neon-cyber {
+    /* ===== 🔮 科技未来 ===== */
+
+    /* 01. Neon Cyber */
+    .style-01 {
       background: linear-gradient(135deg, #0a0f1c 0%, #1a1a3e 100%);
     }
-    .neon-cyber .glow { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; }
+    .style-01 .glow { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; }
+    .style-01 .accent { color: #ff00aa; }
 
-    .terminal-green {
+    /* 02. Terminal Green */
+    .style-02 {
       background: #0d1117;
+      font-family: 'Space Mono', monospace;
     }
-    .terminal-green .card-inner { color: #39d353; font-family: 'Space Mono', monospace; }
+    .style-02 .card-inner { color: #39d353; }
+    .style-02 .card-vibe { color: #8b949e; }
 
-    .retro-future {
-      background: linear-gradient(135deg, #1A0A2E 0%, #2D1B4E 50%, #462B6C 100%);
+    /* 03. Cyberpunk Glow */
+    .style-03 {
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #2d1b4e 100%);
     }
-    .retro-future .card-inner { color: #E8E4F0; }
-    .retro-future .synthwave {
-      color: #FF6EC7;
-      text-shadow: 0 0 10px #FF6EC7, 0 0 20px #FF6EC7;
-    }
-    .retro-future .cyan-glow { color: #00D9FF; text-shadow: 0 0 8px #00D9FF; }
+    .style-03 .pink { color: #ff2a6d; text-shadow: 0 0 8px #ff2a6d; }
+    .style-03 .cyan { color: #05d9e8; }
 
-    .y2k-chrome {
-      background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 50%, #D4D4D4 100%);
+    /* 04. Holographic */
+    .style-04 {
+      background: linear-gradient(135deg, #0a0a0f 0%, #121218 100%);
     }
-    .y2k-chrome .card-inner { color: #1a1a1a; }
-    .y2k-chrome .pink-accent { color: #FF69B4; }
-
-    .aurora-gradient {
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b4e 100%);
-    }
-    .aurora-gradient .aurora-text {
-      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    .style-04 .holo {
+      background: linear-gradient(90deg, #7b68ee, #00d4ff, #ff6b9d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .cyber-orange {
-      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
-      border: 2px solid #FF6B35;
+    /* 05. Data Dashboard */
+    .style-05 {
+      background: #0f172a;
     }
-    .cyber-orange .orange-accent { color: #FF6B35; text-shadow: 0 0 15px rgba(255,107,53,0.5); }
+    .style-05 .card-inner { color: #f1f5f9; }
+    .style-05 .blue { color: #3b82f6; }
+    .style-05 .green { color: #22c55e; }
 
-    .tech-innovation {
-      background: #1e1e1e;
+    /* ===== 💼 商务专业 ===== */
+
+    /* 06. Corporate Navy */
+    .style-06 {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 100%);
     }
-    .tech-innovation .glow { color: #00ffff; }
-    .tech-innovation .blue { color: #0066ff; }
+    .style-06 .card-inner { color: #ffffff; }
+    .style-06 .gold { color: #c9a227; }
 
-    /* === 商务专业 === */
-    .midnight-executive {
-      background: linear-gradient(135deg, #1E2761 0%, #4062a6 100%);
+    /* 07. Finance Graph */
+    .style-07 {
+      background: #f8f9fa;
     }
-    .midnight-executive .ice { color: #CADCFC; }
+    .style-07 .card-inner { color: #1a1a2e; }
+    .style-07 .green { color: #10b981; }
+    .style-07 .blue { color: #3b82f6; }
 
-    .ocean-depths {
-      background: linear-gradient(135deg, #1a2332 0%, #2d4a5a 100%);
+    /* 08. Minimal Pitch */
+    .style-08 {
+      background: #ffffff;
     }
-    .ocean-depths .card-inner { color: #f1faee; }
-    .ocean-depths .accent { color: #2d8b8b; }
+    .style-08 .card-inner { color: #0a0a0a; }
+    .style-08 .card-vibe { color: #6b7280; }
 
-    .electric-studio {
-      background: linear-gradient(to bottom, #fff 50%, #4361ee 50%);
+    /* 09. Trust Blue */
+    .style-09 {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
     }
-    .electric-studio .card-inner { color: #0a0a0a; }
-    .electric-studio .card-vibe { color: #666; }
+    .style-09 .card-inner { color: #ffffff; }
+    .style-09 .warm { color: #f6ad55; }
 
-    .ppt-business {
-      background: linear-gradient(135deg, #0A2463 0%, #1a3a6e 100%);
+    /* 10. Executive Dark */
+    .style-10 {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     }
-    .ppt-business .gold { color: #D4AF37; }
+    .style-10 .card-inner { color: #f5f5f5; }
+    .style-10 .gold { color: #d4af37; }
 
-    .luxury-gold {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-    }
-    .luxury-gold .gold-shine { color: #D4AF37; text-shadow: 0 0 20px rgba(212,175,55,0.3); }
+    /* ===== 🎨 创意设计 ===== */
 
-    .charcoal-minimal {
-      background: #36454F;
-    }
-
-    /* === 创意设计 === */
-    .bold-signal {
+    /* 11. Bold Signal */
+    .style-11 {
       background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
     }
-    .bold-signal .highlight {
+    .style-11 .highlight {
       background: #FF5722;
       color: #1a1a1a;
-      padding: 3px 10px;
+      padding: 2px 8px;
       border-radius: 4px;
-      display: inline-block;
-      margin-top: 8px;
+      font-size: 10px;
       font-weight: 700;
-      font-size: 11px;
     }
 
-    .creative-voltage {
+    /* 12. Creative Voltage */
+    .style-12 {
       background: linear-gradient(to right, #0066ff 50%, #1a1a2e 50%);
     }
-    .creative-voltage .neon { color: #d4ff00; }
+    .style-12 .neon { color: #d4ff00; }
 
-    .glassmorphism {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 13. Artistic Splash */
+    .style-13 {
+      background: #ffffff;
+      position: relative;
     }
-    .glassmorphism .glass-card {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      padding: 8px 14px;
-      margin-top: 8px;
-      font-size: 12px;
-      display: inline-block;
+    .style-13::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      filter: blur(20px);
+      opacity: 0.6;
     }
+    .style-13::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: -10px;
+      width: 60px;
+      height: 60px;
+      background: #4ecdc4;
+      border-radius: 50%;
+      filter: blur(15px);
+      opacity: 0.6;
+    }
+    .style-13 .card-inner { color: #1a1a1a; position: relative; z-index: 1; }
 
-    .bento-grid {
-      background: #F5F5F0;
-    }
-    .bento-grid .card-inner { color: #1a1a1a; }
-    .bento-grid .bento-blocks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      margin-top: 8px;
-    }
-    .bento-grid .bento-block { height: 18px; border-radius: 4px; }
-
-    .neo-brutalist {
+    /* 14. Brutalist */
+    .style-14 {
       background: #FFFF00;
       border: 3px solid #000;
     }
-    .neo-brutalist .card-inner { color: #000; }
-    .neo-brutalist .brutal-box {
+    .style-14 .card-inner { color: #000; }
+    .style-14 .brutal-box {
       background: #000;
       color: #FFFF00;
-      padding: 4px 10px;
-      display: inline-block;
-      margin-top: 8px;
-      font-weight: 800;
+      padding: 2px 8px;
       font-size: 10px;
+      font-weight: 800;
+      margin-top: 4px;
+      display: inline-block;
     }
 
-    /* === 优雅文艺 === */
-    .dark-botanical {
+    /* 15. Gradient Flow */
+    .style-15 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    }
+    .style-15 .glass {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 10px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* ===== 📖 优雅文艺 ===== */
+
+    /* 16. Dark Botanical */
+    .style-16 {
       background: #0f0f0f;
     }
-    .dark-botanical .card-inner { color: #e8e4df; }
-    .dark-botanical .accent { color: #d4a574; }
+    .style-16 .card-inner { color: #e8e4df; }
+    .style-16 .accent { color: #d4a574; }
 
-    .notebook-tabs {
-      background: #2d2d2d;
-      padding: 12px;
+    /* 17. Paper & Ink */
+    .style-17 {
+      background: #faf9f7;
     }
-    .notebook-tabs .page {
+    .style-17 .card-inner { color: #1a1a1a; }
+    .style-17 .crimson { color: #c41e3a; }
+    .style-17 .drop-cap {
+      color: #c41e3a;
+      font-size: 28px;
+      float: left;
+      line-height: 1;
+      margin-right: 4px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* 18. Vintage Editorial */
+    .style-18 {
+      background: #f5f3ee;
+    }
+    .style-18 .card-inner { color: #1a1a1a; }
+    .style-18 .line { width: 30px; height: 2px; background: #1a1a1a; margin-top: 8px; }
+
+    /* 19. Editorial Serif */
+    .style-19 {
+      background: #ffffff;
+    }
+    .style-19 .card-inner { color: #000000; font-family: 'Playfair Display', serif; }
+    .style-19 .red { color: #cc0000; }
+
+    /* 20. Literary */
+    .style-20 {
+      background: #fdfbf7;
+    }
+    .style-20 .card-inner { color: #2c2c2c; }
+    .style-20 .brown { color: #8b4513; }
+
+    /* 21. Japanese Zen */
+    .style-21 {
+      background: #f7f5f0;
+    }
+    .style-21 .card-inner { color: #2c2c2c; font-family: 'Noto Serif SC', serif; }
+    .style-21 .zen-line { width: 40px; height: 1px; background: #2c2c2c; margin: 8px 0; }
+    .style-21 .accent { color: #8b0000; }
+
+    /* ===== 🌿 温暖友好 ===== */
+
+    /* 22. Notebook Tabs */
+    .style-22 {
+      background: #2d2d2d;
+      padding: 10px;
+    }
+    .style-22 .page {
       background: #f8f6f1;
       color: #1a1a1a;
       padding: 12px;
       border-radius: 4px;
       height: 100%;
     }
-    .notebook-tabs .tabs { display: flex; gap: 4px; margin-top: 8px; }
-    .notebook-tabs .tab { padding: 2px 8px; border-radius: 4px; font-size: 9px; }
+    .style-22 .tabs { display: flex; gap: 4px; margin-top: 6px; }
+    .style-22 .tab { padding: 2px 8px; border-radius: 4px; font-size: 9px; }
 
-    .vintage-editorial {
-      background: #f5f3ee;
-    }
-    .vintage-editorial .card-inner { color: #1a1a1a; }
-    .vintage-editorial .line { width: 30px; height: 2px; background: #1a1a1a; margin-top: 10px; }
-
-    .paper-ink {
-      background: #faf9f7;
-    }
-    .paper-ink .card-inner { color: #1a1a1a; }
-    .paper-ink .drop-cap { color: #c41e3a; font-size: 32px; float: left; line-height: 1; margin-right: 4px; }
-
-    .japanese-zen {
-      background: #FAFAF8;
-    }
-    .japanese-zen .card-inner { color: #2D2D2D; font-family: 'Noto Serif SC', serif; }
-    .japanese-zen .zen-line { width: 40px; height: 1px; background: #2D2D2D; margin: 10px 0; }
-    .japanese-zen .zen-accent { color: #8B7355; }
-
-    .midnight-galaxy {
-      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    }
-    .midnight-galaxy .star { color: #ffd700; }
-
-    /* === 温暖友好 === */
-    .ppt-education {
-      background: linear-gradient(135deg, #FF6B35 0%, #4ECDC4 100%);
-    }
-    .ppt-education .card-inner { color: #1a1a1a; }
-
-    .pastel-geometry {
+    /* 23. Pastel Geometry */
+    .style-23 {
       background: #c8d9e6;
     }
-    .pastel-geometry .card-inner { color: #1a1a1a; }
-    .pastel-geometry .pill {
+    .style-23 .card-inner { color: #1a1a1a; }
+    .style-23 .pill {
       background: #f0b4d4;
-      padding: 3px 10px;
+      padding: 2px 10px;
       border-radius: 20px;
       font-size: 10px;
       display: inline-block;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    .split-pastel {
+    /* 24. Split Pastel */
+    .style-24 {
       background: linear-gradient(to right, #f5e6dc 50%, #e4dff0 50%);
     }
-    .split-pastel .card-inner { color: #1a1a1a; }
+    .style-24 .card-inner { color: #1a1a1a; }
 
-    .earth-tone {
-      background: linear-gradient(135deg, #D4C4A8 0%, #E8DCC8 50%, #C9B896 100%);
+    /* 25. Friendly Rounded */
+    .style-25 {
+      background: #fff9f5;
     }
-    .earth-tone .card-inner { color: #3D2E1F; }
-    .earth-tone .terracotta { color: #C66B3D; }
-    .earth-tone .sage { color: #6B8E6B; }
+    .style-25 .card-inner { color: #3d3d3d; }
+    .style-25 .orange { color: #ff8c42; }
 
-    .jianing-moran {
-      background: linear-gradient(135deg, #C8D9E6 0%, #EAF3F8 100%);
-    }
-    .jianing-moran .card-inner { color: #2F4156; }
-    .jianing-moran .teal { color: #567C8D; }
-    .jianing-moran .brand-badge {
-      background: #E8CECA;
-      color: #B07A72;
-      margin-top: 8px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 10px;
-      display: inline-block;
-    }
+    /* ===== ⬜ 极简聚焦 ===== */
 
-    /* === 极简聚焦 === */
-    .swiss-modern {
-      background: #fff;
+    /* 26. Swiss Modern */
+    .style-26 {
+      background: #ffffff;
     }
-    .swiss-modern .card-inner { color: #000; }
-    .swiss-modern .accent { color: #ff3300; }
+    .style-26 .card-inner { color: #000000; font-family: 'Archivo Black', sans-serif; }
+    .style-26 .red { color: #ff3300; }
 
-    .modern-minimalist {
-      background: #fff;
+    /* 27. Monochrome */
+    .style-27 {
+      background: #ffffff;
     }
-    .modern-minimalist .card-inner { color: #1a1a1a; }
+    .style-27 .card-inner { color: #000000; }
+    .style-27 .card-title { font-size: 18px; letter-spacing: 2px; }
 
-    .ppt-minimal {
-      background: #000;
+    /* 28. Ultra Minimal */
+    .style-28 {
+      background: #ffffff;
     }
-    .ppt-minimal .card-title { font-size: 22px; letter-spacing: 2px; }
+    .style-28 .card-inner {
+      color: #1a1a1a;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: 300;
+    }
+    .style-28 .card-title { font-size: 20px; letter-spacing: 4px; font-weight: 300; }
 
-    .ultra-minimal {
-      background: #fff;
+    /* 29. Big Type */
+    .style-29 {
+      background: #ffffff;
     }
-    .ultra-minimal .card-inner { color: #000; justify-content: center; align-items: center; text-align: center; }
-    .ultra-minimal .card-vibe { margin-top: 6px; }
+    .style-29 .card-inner { color: #000000; }
+    .style-29 .card-title { font-size: 24px; font-weight: 900; letter-spacing: -1px; }
+
+    /* 30. Focus Point */
+    .style-30 {
+      background: #0a0a0a;
+    }
+    .style-30 .card-inner { color: #ffffff; justify-content: center; align-items: center; text-align: center; }
+    .style-30 .card-title { font-family: 'DM Serif Display', serif; font-size: 20px; }
   </style>
 </head>
 <body>
-  <h1>Super Slides 风格重组预览</h1>
-  <p class="subtitle">按使用场景分类 · 共 30 种风格</p>
+  <h1>Super Slides 风格库</h1>
+  <p class="subtitle">按使用场景分类 · 共 30 种风格 · 告诉我编号即可</p>
 
   <div class="grid">
     <!-- 🔮 科技未来 -->
     <div class="section-title section-tech">🔮 科技未来 (5)</div>
     <div class="section-desc">适合：技术演讲、产品发布、开发者大会、AI/区块链主题</div>
 
-    <div class="card neon-cyber">
+    <div class="card style-01">
       <div class="card-inner">
-        <div class="card-number">05</div>
+        <div class="card-number">01</div>
         <div class="card-title">Neon <span class="glow">Cyber</span></div>
-        <div class="card-vibe">青色霓虹 · 未来感</div>
+        <div class="card-vibe">青色霓虹 · 未来感 · <span class="accent">品红</span></div>
         <div class="card-colors">
           <div class="color-dot" style="background: #0a0f1c;"></div>
           <div class="color-dot" style="background: #00ffcc;"></div>
@@ -392,9 +442,9 @@
       </div>
     </div>
 
-    <div class="card terminal-green">
+    <div class="card style-02">
       <div class="card-inner">
-        <div class="card-number">06</div>
+        <div class="card-number">02</div>
         <div class="card-title">&gt; Terminal Green_</div>
         <div class="card-vibe">终端风 · 开发者专属</div>
         <div class="card-colors">
@@ -405,47 +455,44 @@
       </div>
     </div>
 
-    <div class="card retro-future">
+    <div class="card style-03">
       <div class="card-inner">
-        <div class="card-number">34</div>
-        <div class="card-title"><span class="synthwave">SYNTH</span><span class="cyan-glow">WAVE</span></div>
-        <div class="card-vibe">80s 赛博朋克</div>
+        <div class="card-number">03</div>
+        <div class="card-title">Cyberpunk <span class="pink">Glow</span></div>
+        <div class="card-vibe"><span class="cyan">赛博朋克</span> · 高对比</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #1A0A2E;"></div>
-          <div class="color-dot" style="background: #FF6EC7;"></div>
-          <div class="color-dot" style="background: #00D9FF;"></div>
+          <div class="color-dot" style="background: #0a0a0f;"></div>
+          <div class="color-dot" style="background: #ff2a6d;"></div>
+          <div class="color-dot" style="background: #05d9e8;"></div>
         </div>
-        <div class="card-fonts">Orbitron + Exo 2</div>
+        <div class="card-fonts">Orbitron + Rajdhani</div>
       </div>
     </div>
 
-    <div class="card y2k-chrome">
+    <div class="card style-04">
       <div class="card-inner">
-        <div class="card-number">29</div>
-        <div class="card-title"><span class="pink-accent">Y2K</span> Chrome</div>
-        <div class="card-vibe">千禧年金属风</div>
+        <div class="card-number">04</div>
+        <div class="card-title"><span class="holo">Holographic</span></div>
+        <div class="card-vibe">全息感 · AR/VR · 玻璃拟态</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: linear-gradient(180deg, #fff, #C0C0C0, #8B8B8B);"></div>
-          <div class="color-dot" style="background: #FF69B4;"></div>
-          <div class="color-dot" style="background: #00CED1;"></div>
+          <div class="color-dot" style="background: #0a0a0f;"></div>
+          <div class="color-dot" style="background: linear-gradient(90deg, #7b68ee, #00d4ff, #ff6b9d);"></div>
         </div>
-        <div class="card-fonts">Outfit + Orbitron</div>
+        <div class="card-fonts">Space Grotesk + Inter</div>
       </div>
     </div>
 
-
-
-    <div class="card tech-innovation">
+    <div class="card style-05">
       <div class="card-inner">
-        <div class="card-number">11</div>
-        <div class="card-title">Tech <span class="blue">Innova</span><span class="glow">tion</span></div>
-        <div class="card-vibe">科技蓝 + 青色</div>
+        <div class="card-number">05</div>
+        <div class="card-title">Data <span class="blue">Dashboard</span></div>
+        <div class="card-vibe">数据驱动 · <span class="green">分析型</span></div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #1e1e1e;"></div>
-          <div class="color-dot" style="background: #0066ff;"></div>
-          <div class="color-dot" style="background: #00ffff;"></div>
+          <div class="color-dot" style="background: #0f172a;"></div>
+          <div class="color-dot" style="background: #3b82f6;"></div>
+          <div class="color-dot" style="background: #22c55e;"></div>
         </div>
-        <div class="card-fonts">DejaVu Sans</div>
+        <div class="card-fonts">DM Sans + Fira Code</div>
       </div>
     </div>
 
@@ -453,100 +500,98 @@
     <div class="section-title section-business">💼 商务专业 (5)</div>
     <div class="section-desc">适合：商业提案、财务报告、企业内训、投资人路演</div>
 
-    <div class="card midnight-executive">
+    <div class="card style-06">
       <div class="card-inner">
-        <div class="card-number">09</div>
-        <div class="card-title">Midnight <span class="ice">Executive</span></div>
-        <div class="card-vibe">深蓝商务</div>
+        <div class="card-number">06</div>
+        <div class="card-title">Corporate <span class="gold">Navy</span></div>
+        <div class="card-vibe">深蓝商务 · 信任感 · 金色点缀</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #1E2761;"></div>
-          <div class="color-dot" style="background: #CADCFC;"></div>
-          <div class="color-dot" style="background: #fff;"></div>
+          <div class="color-dot" style="background: #0a1628;"></div>
+          <div class="color-dot" style="background: #c9a227;"></div>
+          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
         </div>
-        <div class="card-fonts">Georgia + Calibri</div>
+        <div class="card-fonts">Playfair Display + Source Sans</div>
       </div>
     </div>
 
-    <div class="card ocean-depths">
+    <div class="card style-07">
       <div class="card-inner">
         <div class="card-number">07</div>
-        <div class="card-title">Ocean Depths</div>
-        <div class="card-vibe"><span class="accent">海洋深蓝</span> · 可信赖</div>
+        <div class="card-title">Finance <span class="green">Graph</span></div>
+        <div class="card-vibe">财务风格 · 图表聚焦 · <span class="blue">数据型</span></div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #1a2332;"></div>
-          <div class="color-dot" style="background: #2d8b8b;"></div>
-          <div class="color-dot" style="background: #a8dadc;"></div>
+          <div class="color-dot" style="background: #f8f9fa;"></div>
+          <div class="color-dot" style="background: #10b981;"></div>
+          <div class="color-dot" style="background: #3b82f6;"></div>
         </div>
-        <div class="card-fonts">DejaVu Sans</div>
+        <div class="card-fonts">Libre Baskerville + Lato</div>
       </div>
     </div>
 
-    <div class="card electric-studio">
+    <div class="card style-08">
       <div class="card-inner">
-        <div class="card-number">02</div>
-        <div class="card-title">Electric Studio</div>
-        <div class="card-vibe">专业高对比</div>
+        <div class="card-number">08</div>
+        <div class="card-title">Minimal Pitch</div>
+        <div class="card-vibe">创业路演 · 极简聚焦 · 最大留白</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #0a0a0a;"></div>
-          <div class="color-dot" style="background: #4361ee;"></div>
           <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
-        </div>
-        <div class="card-fonts">Manrope</div>
-      </div>
-    </div>
-
-    <div class="card ppt-business">
-      <div class="card-inner">
-        <div class="card-number">19</div>
-        <div class="card-title">Business <span class="gold">Pro</span></div>
-        <div class="card-vibe">商务金蓝</div>
-        <div class="card-colors">
-          <div class="color-dot" style="background: #0A2463;"></div>
-          <div class="color-dot" style="background: #D4AF37;"></div>
-          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
-        </div>
-        <div class="card-fonts">Montserrat + Open Sans</div>
-      </div>
-    </div>
-
-    <div class="card luxury-gold">
-      <div class="card-inner">
-        <div class="card-number">25</div>
-        <div class="card-title">Dark <span class="gold-shine">Luxury</span></div>
-        <div class="card-vibe">奢华金融</div>
-        <div class="card-colors">
           <div class="color-dot" style="background: #0a0a0a;"></div>
-          <div class="color-dot" style="background: #D4AF37;"></div>
         </div>
-        <div class="card-fonts">Playfair Display + Lato</div>
+        <div class="card-fonts">Inter</div>
       </div>
     </div>
 
+    <div class="card style-09">
+      <div class="card-inner">
+        <div class="card-number">09</div>
+        <div class="card-title">Trust <span class="warm">Blue</span></div>
+        <div class="card-vibe">可信赖 · 企业蓝 · 稳重</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #1e3a5f;"></div>
+          <div class="color-dot" style="background: #2c5282;"></div>
+          <div class="color-dot" style="background: #f6ad55;"></div>
+        </div>
+        <div class="card-fonts">Merriweather + Open Sans</div>
+      </div>
+    </div>
+
+    <div class="card style-10">
+      <div class="card-inner">
+        <div class="card-number">10</div>
+        <div class="card-title">Executive <span class="gold">Dark</span></div>
+        <div class="card-vibe">高管风格 · 深色奢华 · 金属质感</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #1a1a1a;"></div>
+          <div class="color-dot" style="background: #2d2d2d;"></div>
+          <div class="color-dot" style="background: #d4af37;"></div>
+        </div>
+        <div class="card-fonts">Cormorant Garamond + Montserrat</div>
+      </div>
+    </div>
 
     <!-- 🎨 创意设计 -->
     <div class="section-title section-creative">🎨 创意设计 (5)</div>
     <div class="section-desc">适合：设计分享、创意提案、品牌展示、作品集</div>
 
-    <div class="card bold-signal">
+    <div class="card style-11">
       <div class="card-inner">
-        <div class="card-number">01</div>
+        <div class="card-number">11</div>
         <div class="card-title">Bold Signal</div>
-        <div class="card-vibe">大胆橙色 · 高冲击</div>
-        <div class="highlight">关键信息</div>
+        <div class="card-vibe">大胆橙色 · 高冲击力</div>
+        <div class="highlight">KEY INFO</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #1a1a1a;"></div>
           <div class="color-dot" style="background: #FF5722;"></div>
-          <div class="color-dot" style="background: #fff;"></div>
         </div>
         <div class="card-fonts">Archivo Black + Space Grotesk</div>
       </div>
     </div>
 
-    <div class="card creative-voltage">
+    <div class="card style-12">
       <div class="card-inner">
-        <div class="card-number">03</div>
+        <div class="card-number">12</div>
         <div class="card-title">Creative <span class="neon">Voltage</span></div>
-        <div class="card-vibe">电光蓝 + 霓虹黄</div>
+        <div class="card-vibe">电光蓝 · 霓虹黄 · 能量感</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #0066ff;"></div>
           <div class="color-dot" style="background: #1a1a2e;"></div>
@@ -556,48 +601,47 @@
       </div>
     </div>
 
-    <div class="card glassmorphism">
+    <div class="card style-13">
       <div class="card-inner">
-        <div class="card-number">24</div>
-        <div class="card-title">Glassmorphism</div>
-        <div class="card-vibe">毛玻璃效果</div>
-        <div class="glass-card">玻璃拟态</div>
+        <div class="card-number">13</div>
+        <div class="card-title">Artistic Splash</div>
+        <div class="card-vibe">艺术感 · 色彩泼溅 · 活泼</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
-          <div class="color-dot" style="background: rgba(255,255,255,0.25);"></div>
+          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
+          <div class="color-dot" style="background: #ff6b6b;"></div>
+          <div class="color-dot" style="background: #4ecdc4;"></div>
+          <div class="color-dot" style="background: #ffe66d;"></div>
         </div>
-        <div class="card-fonts">Inter + SF Pro</div>
+        <div class="card-fonts">Dela Gothic One + Nunito</div>
       </div>
     </div>
 
-    <div class="card bento-grid">
+    <div class="card style-14">
       <div class="card-inner">
-        <div class="card-number">31</div>
-        <div class="card-title">Bento Grid</div>
-        <div class="card-vibe">Apple 风模块化</div>
-        <div class="bento-blocks">
-          <div class="bento-block" style="background: #FF6B6B;"></div>
-          <div class="bento-block" style="background: #4ECDC4;"></div>
-          <div class="bento-block" style="background: #45B7D1;"></div>
-          <div class="bento-block" style="background: #96CEB4; grid-column: span 2;"></div>
-          <div class="bento-block" style="background: #FFEAA7;"></div>
-        </div>
-        <div class="card-fonts">SF Pro + Inter</div>
-      </div>
-    </div>
-
-    <div class="card neo-brutalist">
-      <div class="card-inner">
-        <div class="card-number">33</div>
+        <div class="card-number">14</div>
         <div class="card-title">BRUTALIST</div>
-        <div class="brutal-box">粗犷设计</div>
-        <div class="card-vibe">黄黑高对比</div>
+        <div class="brutal-box">RAW</div>
+        <div class="card-vibe">粗犷 · 反设计 · 高对比</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #FFFF00; border-color: #000;"></div>
           <div class="color-dot" style="background: #000;"></div>
-          <div class="color-dot" style="background: #FF0000;"></div>
+          <div class="color-dot" style="background: #ff0000;"></div>
         </div>
-        <div class="card-fonts">Space Grotesk</div>
+        <div class="card-fonts">Courier New / Arial Black</div>
+      </div>
+    </div>
+
+    <div class="card style-15">
+      <div class="card-inner">
+        <div class="card-number">15</div>
+        <div class="card-title">Gradient Flow</div>
+        <div class="glass">玻璃效果</div>
+        <div class="card-vibe">渐变流动 · 现代感 · 平滑</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+          <div class="color-dot" style="background: rgba(255,255,255,0.3);"></div>
+        </div>
+        <div class="card-fonts">Outfit</div>
       </div>
     </div>
 
@@ -605,9 +649,9 @@
     <div class="section-title section-elegant">📖 优雅文艺 (6)</div>
     <div class="section-desc">适合：文化分享、读书会、品牌故事、艺术主题</div>
 
-    <div class="card dark-botanical">
+    <div class="card style-16">
       <div class="card-inner">
-        <div class="card-number">04</div>
+        <div class="card-number">16</div>
         <div class="card-title">Dark Botanical</div>
         <div class="card-vibe"><span class="accent">暗色优雅</span> · 暖色点缀</div>
         <div class="card-colors">
@@ -619,26 +663,26 @@
       </div>
     </div>
 
-    <div class="card notebook-tabs">
-      <div class="page">
-        <div class="card-number">12</div>
-        <div class="card-title">Notebook Tabs</div>
-        <div class="card-vibe">编辑风彩签</div>
-        <div class="tabs">
-          <div class="tab" style="background: #98d4bb;">Tab 1</div>
-          <div class="tab" style="background: #c7b8ea;">Tab 2</div>
-          <div class="tab" style="background: #f4b8c5;">Tab 3</div>
+    <div class="card style-17">
+      <div class="card-inner">
+        <div class="card-number">17</div>
+        <div class="card-title"><span class="drop-cap">P</span>aper & Ink</div>
+        <div class="card-vibe">文学感 · <span class="crimson">经典</span> · 纸墨</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #faf9f7;"></div>
+          <div class="color-dot" style="background: #1a1a1a;"></div>
+          <div class="color-dot" style="background: #c41e3a;"></div>
         </div>
-        <div class="card-fonts" style="margin-top: 10px;">Bodoni Moda + DM Sans</div>
+        <div class="card-fonts">Cormorant Garamond + Source Serif</div>
       </div>
     </div>
 
-    <div class="card vintage-editorial">
+    <div class="card style-18">
       <div class="card-inner">
-        <div class="card-number">15</div>
+        <div class="card-number">18</div>
         <div class="card-title">Vintage Editorial</div>
-        <div class="card-vibe">复古编辑</div>
         <div class="line"></div>
+        <div class="card-vibe">复古编辑 · 个性驱动</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #f5f3ee;"></div>
           <div class="color-dot" style="background: #1a1a1a;"></div>
@@ -648,46 +692,46 @@
       </div>
     </div>
 
-    <div class="card paper-ink">
+    <div class="card style-19">
       <div class="card-inner">
-        <div class="card-number">17</div>
-        <div class="card-title"><span class="drop-cap">P</span>aper & Ink</div>
-        <div class="card-vibe">文学感</div>
+        <div class="card-number">19</div>
+        <div class="card-title">Editorial <span class="red">Serif</span></div>
+        <div class="card-vibe">经典报纸 · 知性 · 权威</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #faf9f7;"></div>
-          <div class="color-dot" style="background: #1a1a1a;"></div>
-          <div class="color-dot" style="background: #c41e3a;"></div>
+          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
+          <div class="color-dot" style="background: #000;"></div>
+          <div class="color-dot" style="background: #cc0000;"></div>
         </div>
-        <div class="card-fonts">Cormorant + Source Serif</div>
+        <div class="card-fonts">Playfair Display + Georgia</div>
       </div>
     </div>
 
-    <div class="card japanese-zen">
+    <div class="card style-20">
       <div class="card-inner">
-        <div class="card-number">32</div>
+        <div class="card-number">20</div>
+        <div class="card-title">Literary</div>
+        <div class="card-vibe">书卷气 · 沉思 · <span class="brown">典雅</span></div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #fdfbf7;"></div>
+          <div class="color-dot" style="background: #2c2c2c;"></div>
+          <div class="color-dot" style="background: #8b4513;"></div>
+        </div>
+        <div class="card-fonts">Libre Baskerville + Lora</div>
+      </div>
+    </div>
+
+    <div class="card style-21">
+      <div class="card-inner">
+        <div class="card-number">21</div>
         <div class="card-title">日本の禅</div>
         <div class="zen-line"></div>
-        <div class="card-vibe"><span class="zen-accent">侘寂</span> · 极简静谧</div>
+        <div class="card-vibe"><span class="accent">侘寂</span> · 极简静谧 · 东方</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #FAFAF8; border-color: #ccc;"></div>
-          <div class="color-dot" style="background: #2D2D2D;"></div>
-          <div class="color-dot" style="background: #8B7355;"></div>
+          <div class="color-dot" style="background: #f7f5f0; border-color: #ccc;"></div>
+          <div class="color-dot" style="background: #2c2c2c;"></div>
+          <div class="color-dot" style="background: #8b0000;"></div>
         </div>
-        <div class="card-fonts">Noto Serif SC</div>
-      </div>
-    </div>
-
-    <div class="card midnight-galaxy">
-      <div class="card-inner">
-        <div class="card-number">08</div>
-        <div class="card-title">Midnight <span class="star">✦</span> Galaxy</div>
-        <div class="card-vibe">戏剧宇宙感</div>
-        <div class="card-colors">
-          <div class="color-dot" style="background: #0f0c29;"></div>
-          <div class="color-dot" style="background: #302b63;"></div>
-          <div class="color-dot" style="background: #ffd700;"></div>
-        </div>
-        <div class="card-fonts">Display + Body</div>
+        <div class="card-fonts">Noto Serif JP + Noto Sans JP</div>
       </div>
     </div>
 
@@ -695,13 +739,26 @@
     <div class="section-title section-friendly">🌿 温暖友好 (4)</div>
     <div class="section-desc">适合：教育讲座、社区分享、新手培训、亲子主题</div>
 
+    <div class="card style-22">
+      <div class="page">
+        <div class="card-number">22</div>
+        <div class="card-title">Notebook Tabs</div>
+        <div class="card-vibe">编辑风彩签 · 有序优雅</div>
+        <div class="tabs">
+          <div class="tab" style="background: #98d4bb;">Tab 1</div>
+          <div class="tab" style="background: #c7b8ea;">Tab 2</div>
+          <div class="tab" style="background: #f4b8c5;">Tab 3</div>
+        </div>
+        <div class="card-fonts" style="margin-top: 8px;">Bodoni Moda + DM Sans</div>
+      </div>
+    </div>
 
-    <div class="card pastel-geometry">
+    <div class="card style-23">
       <div class="card-inner">
-        <div class="card-number">13</div>
+        <div class="card-number">23</div>
         <div class="card-title">Pastel Geometry</div>
-        <div class="card-vibe">粉彩几何</div>
         <div class="pill">标签示例</div>
+        <div class="card-vibe">粉彩几何 · 友好现代</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #c8d9e6;"></div>
           <div class="color-dot" style="background: #f0b4d4;"></div>
@@ -711,11 +768,11 @@
       </div>
     </div>
 
-    <div class="card split-pastel">
+    <div class="card style-24">
       <div class="card-inner">
-        <div class="card-number">14</div>
+        <div class="card-number">24</div>
         <div class="card-title">Split Pastel</div>
-        <div class="card-vibe">双色粉彩</div>
+        <div class="card-vibe">双色粉彩 · 俏皮友好</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #f5e6dc;"></div>
           <div class="color-dot" style="background: #e4dff0;"></div>
@@ -725,45 +782,30 @@
       </div>
     </div>
 
-    <div class="card earth-tone">
+    <div class="card style-25">
       <div class="card-inner">
-        <div class="card-number">30</div>
-        <div class="card-title">Earth <span class="terracotta">Tone</span></div>
-        <div class="card-vibe">大地色 · <span class="sage">有机</span>自然</div>
+        <div class="card-number">25</div>
+        <div class="card-title">Friendly <span class="orange">Rounded</span></div>
+        <div class="card-vibe">圆润友好 · 温暖 · 社区感</div>
         <div class="card-colors">
-          <div class="color-dot" style="background: #D4C4A8;"></div>
-          <div class="color-dot" style="background: #C66B3D;"></div>
-          <div class="color-dot" style="background: #6B8E6B;"></div>
+          <div class="color-dot" style="background: #fff9f5;"></div>
+          <div class="color-dot" style="background: #ff8c42;"></div>
+          <div class="color-dot" style="background: #ffd166;"></div>
+          <div class="color-dot" style="background: #06d6a0;"></div>
         </div>
-        <div class="card-fonts">Instrument Serif + DM Sans</div>
-      </div>
-    </div>
-
-    <div class="card jianing-moran">
-      <div class="card-inner">
-        <div class="card-number">23</div>
-        <div class="card-title">加宁慢慢来</div>
-        <div class="card-vibe">莫兰迪 · <span class="teal">知性温柔</span></div>
-        <div class="card-colors">
-          <div class="color-dot" style="background: #C8D9E6;"></div>
-          <div class="color-dot" style="background: #2F4156;"></div>
-          <div class="color-dot" style="background: #567C8D;"></div>
-          <div class="color-dot" style="background: #E8CECA;"></div>
-        </div>
-        <div class="card-fonts">PingFang SC + Noto Sans SC</div>
-        <div class="brand-badge">✦ 加宁慢慢来</div>
+        <div class="card-fonts">Nunito</div>
       </div>
     </div>
 
     <!-- ⬜ 极简聚焦 -->
-    <div class="section-title section-minimal">⬜ 极简聚焦 (4)</div>
+    <div class="section-title section-minimal">⬜ 极简聚焦 (5)</div>
     <div class="section-desc">适合：TED 演讲、大会开场、聚焦观点、金句展示</div>
 
-    <div class="card swiss-modern">
+    <div class="card style-26">
       <div class="card-inner">
-        <div class="card-number">16</div>
-        <div class="card-title">SWISS <span class="accent">MODERN</span></div>
-        <div class="card-vibe">红黑白 · 包豪斯</div>
+        <div class="card-number">26</div>
+        <div class="card-title">SWISS <span class="red">MODERN</span></div>
+        <div class="card-vibe">红黑白 · 包豪斯 · 精确</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #fff; border-color: #000;"></div>
           <div class="color-dot" style="background: #000;"></div>
@@ -773,49 +815,62 @@
       </div>
     </div>
 
-    <div class="card modern-minimalist">
+    <div class="card style-27">
       <div class="card-inner">
-        <div class="card-number">18</div>
-        <div class="card-title">MODERN MINIMALIST</div>
-        <div class="card-vibe">灰白极简</div>
-        <div class="card-colors">
-          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
-          <div class="color-dot" style="background: #1a1a1a;"></div>
-          <div class="color-dot" style="background: #888;"></div>
-        </div>
-        <div class="card-fonts">Light + Regular</div>
-      </div>
-    </div>
-
-    <div class="card ppt-minimal">
-      <div class="card-inner">
-        <div class="card-number">22</div>
-        <div class="card-title">MINIMAL BOLD</div>
-        <div class="card-vibe">黑白 TED 风</div>
-        <div class="card-colors">
-          <div class="color-dot" style="background: #000;"></div>
-          <div class="color-dot" style="background: #FFF; border-color: #666;"></div>
-        </div>
-        <div class="card-fonts">Helvetica Bold</div>
-      </div>
-    </div>
-
-    <div class="card ultra-minimal">
-      <div class="card-inner">
-        <div class="card-number">28</div>
-        <div class="card-title" style="font-size: 28px; letter-spacing: 3px;">ULTRA</div>
-        <div class="card-vibe">超大字极简</div>
+        <div class="card-number">27</div>
+        <div class="card-title">MONOCHROME</div>
+        <div class="card-vibe">纯黑白 · 戏剧性 · 本质</div>
         <div class="card-colors">
           <div class="color-dot" style="background: #fff; border-color: #000;"></div>
           <div class="color-dot" style="background: #000;"></div>
         </div>
-        <div class="card-fonts">Helvetica Now</div>
+        <div class="card-fonts">Helvetica Neue</div>
+      </div>
+    </div>
+
+    <div class="card style-28">
+      <div class="card-inner">
+        <div class="card-number">28</div>
+        <div class="card-title">ULTRA MINIMAL</div>
+        <div class="card-vibe">极度留白 · 精致 · 安静</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
+          <div class="color-dot" style="background: #1a1a1a;"></div>
+        </div>
+        <div class="card-fonts">Inter Light</div>
+      </div>
+    </div>
+
+    <div class="card style-29">
+      <div class="card-inner">
+        <div class="card-number">29</div>
+        <div class="card-title">BIG TYPE</div>
+        <div class="card-vibe">超大字体 · 自信 · 冲击力</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #fff; border-color: #ccc;"></div>
+          <div class="color-dot" style="background: #000;"></div>
+        </div>
+        <div class="card-fonts">Inter Black</div>
+      </div>
+    </div>
+
+    <div class="card style-30">
+      <div class="card-inner">
+        <div class="card-number">30</div>
+        <div class="card-title">Focus Point</div>
+        <div class="card-vibe">单一焦点 · 深色背景 · 聚焦</div>
+        <div class="card-colors">
+          <div class="color-dot" style="background: #0a0a0a;"></div>
+          <div class="color-dot" style="background: #1a1a1a;"></div>
+          <div class="color-dot" style="background: #fff;"></div>
+        </div>
+        <div class="card-fonts">DM Serif Display + DM Sans</div>
       </div>
     </div>
   </div>
 
   <p style="text-align: center; margin-top: 48px; color: #666; font-size: 14px;">
-    💡 按使用场景分类 · 30 种风格便于对比选择
+    💡 选择你喜欢的风格编号（如 01、12、26），我来帮你生成演示稿
   </p>
 </body>
 </html>
