@@ -1494,23 +1494,56 @@ bash scripts/export-pdf.sh ~/Desktop/[主题]-slides/index.html --compact
 
 **用户在 Step 4.4 已选择"部署到线上"，直接执行：**
 
-**优先使用 Netlify（国内访问更稳定），如果失败则尝试 Vercel：**
+**部署方式优先级：Netlify 拖拽上传 > Vercel > CLI 部署**
+
+---
+
+#### 方式 1：Netlify 拖拽上传（推荐）
+
+**告知用户操作步骤：**
+
+```
+📦 部署到 Netlify（推荐，简单快速）
+
+步骤：
+1. 打开 https://app.netlify.com
+2. 登录（可用 GitHub/Google 账号）
+3. 点击 "Add new site" → "Deploy manually"
+4. 把整个文件夹拖进去
+
+文件夹路径：~/Desktop/[主题]-slides/
+
+几秒钟后你会获得一个公开链接！
+```
+
+**⚠️ 重要提醒（必须告知用户）：**
+> 如果在部署过程中遇到任何问题，可以截图发给我，我来帮你解决！
+
+---
+
+#### 方式 2：Vercel 部署
+
+如果用户偏好 Vercel 或 Netlify 不顺利：
+
+```
+📦 部署到 Vercel
+
+步骤：
+1. 打开 https://vercel.com
+2. 登录（可用 GitHub 账号）
+3. 点击 "Add New..." → "Project"
+4. 选择 "Import Git Repository" 或直接拖拽文件夹
+```
+
+---
+
+#### 方式 3：CLI 自动部署（备选）
+
+如果用户希望自动化部署，可使用脚本：
 
 ```bash
 bash scripts/deploy.sh ~/Desktop/[主题]-slides/
 ```
-
-**部署逻辑：**
-
-1. **首选 Netlify**（国内访问友好）
-   - 检查是否安装 Netlify CLI → 没有则自动安装 (`npm i -g netlify-cli`)
-   - 检查是否登录 → 没有则引导用户登录（打开浏览器授权）
-   - 部署完成后返回一个公开 URL
-
-2. **如果 Netlify 失败**，回退到 Vercel
-   - 检查是否安装 Vercel CLI → 没有则自动安装
-   - 检查是否登录 → 没有则引导用户登录
-   - 部署完成后返回一个公开 URL
 
 **部署完成后告知用户：**
 
@@ -1537,6 +1570,7 @@ bash scripts/deploy.sh ~/Desktop/[主题]-slides/
 - 主版本需要网络加载字体 → 联网环境下正常显示
 - 备份版本用系统字体 → 离线也能正常显示
 - **国内用户推荐 Netlify**，访问更稳定
+- **任何问题都可以截图问 AI**
 
 ## 运行时生成的文件
 
