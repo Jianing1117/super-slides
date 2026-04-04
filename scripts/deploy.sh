@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# deploy.sh — Deploy a slide deck to Vercel for instant sharing
+# deploy.sh — Deploy a slide deck to Netlify (primary) or Vercel (fallback)
 #
 # Usage:
 #   bash scripts/deploy.sh <path-to-slide-folder-or-html>
@@ -9,13 +9,12 @@
 #   bash scripts/deploy.sh ./presentation.html
 #
 # What this does:
-#   1. Checks if Vercel CLI is installed (installs if not)
-#   2. Checks if user is logged in (guides through login if not)
+#   1. Tries Netlify first (better for users in China)
+#   2. Falls back to Vercel if Netlify fails
 #   3. Deploys the slide deck to a public URL
 #   4. Prints the live URL
 #
 # The deployed URL is permanent and works on any device (mobile, tablet, desktop).
-# No server to maintain — Vercel hosts it for free.
 set -euo pipefail
 
 # ─── Colors ────────────────────────────────────────────────
@@ -87,13 +86,7 @@ else
     exit 1
 fi
 
-# ─── Step 1: Check for Vercel CLI ─────────────────────────
-
-echo ""
-echo -e "${BOLD}╔══════════════════════════════════════╗${NC}"
-echo -e "${BOLD}║       Deploy Slides to Vercel         ║${NC}"
-echo -e "${BOLD}╚══════════════════════════════════════╝${NC}"
-echo ""
+# ─── Check for Node.js ─────────────────────────────────────
 
 if ! command -v npx &>/dev/null; then
     err "Node.js is required but not installed."
@@ -104,115 +97,237 @@ if ! command -v npx &>/dev/null; then
     exit 1
 fi
 
-info "Checking Vercel CLI..."
+# ─── Helper function: Deploy via Netlify ──────────────────
 
-# Check if vercel is available (either globally or via npx)
-if command -v vercel &>/dev/null; then
-    VERCEL_CMD="vercel"
-    ok "Vercel CLI found"
-elif npx --yes vercel --version &>/dev/null 2>&1; then
-    VERCEL_CMD="npx --yes vercel"
-    ok "Vercel CLI available via npx"
-else
-    info "Installing Vercel CLI..."
-    npm install -g vercel
-    VERCEL_CMD="vercel"
-    ok "Vercel CLI installed"
-fi
-
-# ─── Step 2: Check login status ───────────────────────────
-
-echo ""
-info "Checking Vercel login status..."
-
-# Try to check if logged in by running whoami
-if ! $VERCEL_CMD whoami &>/dev/null 2>&1; then
+deploy_netlify() {
     echo ""
-    warn "You're not logged in to Vercel yet."
-    echo ""
-    echo -e "${BOLD}To log in, run this command and follow the prompts:${NC}"
-    echo ""
-    echo "    vercel login"
-    echo ""
-    echo "If you don't have a Vercel account yet:"
-    echo "  1. Go to https://vercel.com/signup"
-    echo "  2. Sign up with GitHub, GitLab, email, or any method"
-    echo "  3. Come back here and run: vercel login"
-    echo "  4. Then re-run this deploy script"
+    echo -e "${BOLD}╔══════════════════════════════════════╗${NC}"
+    echo -e "${BOLD}║      Deploy Slides to Netlify         ║${NC}"
+    echo -e "${BOLD}╚══════════════════════════════════════╝${NC}"
     echo ""
 
-    # Try interactive login
-    echo -e "${YELLOW}Attempting interactive login now...${NC}"
+    info "Checking Netlify CLI..."
+
+    # Check if netlify is available
+    if command -v netlify &>/dev/null; then
+        NETLIFY_CMD="netlify"
+        ok "Netlify CLI found"
+    elif npx --yes netlify-cli --version &>/dev/null 2>&1; then
+        NETLIFY_CMD="npx --yes netlify-cli"
+        ok "Netlify CLI available via npx"
+    else
+        info "Installing Netlify CLI..."
+        npm install -g netlify-cli
+        NETLIFY_CMD="netlify"
+        ok "Netlify CLI installed"
+    fi
+
+    # Check login status
     echo ""
-    $VERCEL_CMD login || {
-        err "Login failed. Please run 'vercel login' manually and try again."
-        [[ "$CLEANUP_TEMP" == "true" ]] && rm -rf "$DEPLOY_DIR"
-        exit 1
+    info "Checking Netlify login status..."
+
+    if ! $NETLIFY_CMD status &>/dev/null 2>&1; then
+        echo ""
+        warn "You're not logged in to Netlify yet."
+        echo ""
+        echo -e "${BOLD}To log in, run this command and follow the prompts:${NC}"
+        echo ""
+        echo "    netlify login"
+        echo ""
+        echo "If you don't have a Netlify account yet:"
+        echo "  1. Go to https://app.netlify.com/signup"
+        echo "  2. Sign up with GitHub, GitLab, email, or any method"
+        echo "  3. Come back here and run: netlify login"
+        echo "  4. Then re-run this deploy script"
+        echo ""
+
+        # Try interactive login
+        echo -e "${YELLOW}Attempting interactive login now...${NC}"
+        echo ""
+        $NETLIFY_CMD login || {
+            err "Login failed. Please run 'netlify login' manually and try again."
+            return 1
+        }
+        echo ""
+        ok "Logged in to Netlify!"
+    fi
+
+    NETLIFY_USER=$($NETLIFY_CMD status 2>/dev/null | head -1 || echo "unknown")
+    ok "Account: $NETLIFY_USER"
+
+    # Deploy
+    echo ""
+    info "Deploying slides to Netlify..."
+    echo ""
+
+    DEPLOY_OUTPUT=$($NETLIFY_CMD deploy --dir="$DEPLOY_DIR" --prod 2>&1) || {
+        err "Netlify deployment failed:"
+        echo "$DEPLOY_OUTPUT"
+        return 1
     }
+
+    # Extract the URL from output
+    DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'https://[^ ]*\.netlify\.app' | tail -1)
+
+    if [[ -z "$DEPLOY_URL" ]]; then
+        # Try alternative extraction
+        DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep -oE 'https://[a-zA-Z0-9-]+\.netlify\.app' | tail -1)
+    fi
+
     echo ""
-    ok "Logged in to Vercel!"
-fi
+    echo -e "${BOLD}════════════════════════════════════════${NC}"
+    ok "Slides deployed to Netlify!"
+    echo ""
+    echo -e "  ${BOLD}Live URL:${NC}  $DEPLOY_URL"
+    echo ""
+    echo "  This URL works on any device — phones, tablets, laptops."
+    echo "  Share it via Slack, email, text, or anywhere."
+    echo ""
+    echo -e "  ${CYAN}Tip:${NC} To take it down later, visit https://app.netlify.com"
+    echo -e "       and delete the site."
+    echo -e "${BOLD}════════════════════════════════════════${NC}"
+    echo ""
 
-VERCEL_USER=$($VERCEL_CMD whoami 2>/dev/null || echo "unknown")
-ok "Logged in as: $VERCEL_USER"
-
-# ─── Step 3: Deploy ───────────────────────────────────────
-
-echo ""
-info "Deploying slides..."
-echo ""
-
-# Deploy with sensible defaults:
-#   --yes: skip confirmation prompts
-#   --prod: deploy to production URL (not preview)
-#   --name: use the folder name as the project name
-DECK_NAME=$(basename "$DEPLOY_DIR")
-# If we used a temp dir, use the original filename without .html
-if [[ "$CLEANUP_TEMP" == "true" ]]; then
-    DECK_NAME=$(basename "$INPUT" .html)
-fi
-
-# Sanitize project name for Vercel:
-# - lowercase, replace spaces/special chars with hyphens
-# - collapse multiple hyphens, trim to 100 chars
-DECK_NAME=$(echo "$DECK_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//' | cut -c1-100)
-
-# Vercel uses the directory name as the project name, so rename the deploy
-# directory to the sanitized deck name (avoids deprecated --name flag)
-if [[ "$CLEANUP_TEMP" == "true" ]]; then
-    RENAMED_DIR="$(dirname "$DEPLOY_DIR")/$DECK_NAME"
-    mv "$DEPLOY_DIR" "$RENAMED_DIR"
-    DEPLOY_DIR="$RENAMED_DIR"
-fi
-
-DEPLOY_OUTPUT=$($VERCEL_CMD deploy "$DEPLOY_DIR" --yes --prod 2>&1) || {
-    err "Deployment failed:"
-    echo "$DEPLOY_OUTPUT"
-    [[ "$CLEANUP_TEMP" == "true" ]] && rm -rf "$DEPLOY_DIR"
-    exit 1
+    return 0
 }
 
-# Extract the URL from output
-DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'https://[^ ]*' | tail -1)
+# ─── Helper function: Deploy via Vercel ───────────────────
 
-# ─── Step 4: Success ──────────────────────────────────────
+deploy_vercel() {
+    echo ""
+    echo -e "${BOLD}╔══════════════════════════════════════╗${NC}"
+    echo -e "${BOLD}║       Deploy Slides to Vercel         ║${NC}"
+    echo -e "${BOLD}╚══════════════════════════════════════╝${NC}"
+    echo ""
 
-echo ""
-echo -e "${BOLD}════════════════════════════════════════${NC}"
-ok "Slides deployed successfully!"
-echo ""
-echo -e "  ${BOLD}Live URL:${NC}  $DEPLOY_URL"
-echo ""
-echo "  This URL works on any device — phones, tablets, laptops."
-echo "  Share it via Slack, email, text, or anywhere."
-echo ""
-echo -e "  ${CYAN}Tip:${NC} To take it down later, visit https://vercel.com/dashboard"
-echo -e "       and delete the project '${DECK_NAME}'."
-echo -e "${BOLD}════════════════════════════════════════${NC}"
+    info "Checking Vercel CLI..."
+
+    # Check if vercel is available
+    if command -v vercel &>/dev/null; then
+        VERCEL_CMD="vercel"
+        ok "Vercel CLI found"
+    elif npx --yes vercel --version &>/dev/null 2>&1; then
+        VERCEL_CMD="npx --yes vercel"
+        ok "Vercel CLI available via npx"
+    else
+        info "Installing Vercel CLI..."
+        npm install -g vercel
+        VERCEL_CMD="vercel"
+        ok "Vercel CLI installed"
+    fi
+
+    # Check login status
+    echo ""
+    info "Checking Vercel login status..."
+
+    if ! $VERCEL_CMD whoami &>/dev/null 2>&1; then
+        echo ""
+        warn "You're not logged in to Vercel yet."
+        echo ""
+        echo -e "${BOLD}To log in, run this command and follow the prompts:${NC}"
+        echo ""
+        echo "    vercel login"
+        echo ""
+        echo "If you don't have a Vercel account yet:"
+        echo "  1. Go to https://vercel.com/signup"
+        echo "  2. Sign up with GitHub, GitLab, email, or any method"
+        echo "  3. Come back here and run: vercel login"
+        echo "  4. Then re-run this deploy script"
+        echo ""
+
+        # Try interactive login
+        echo -e "${YELLOW}Attempting interactive login now...${NC}"
+        echo ""
+        $VERCEL_CMD login || {
+            err "Login failed. Please run 'vercel login' manually and try again."
+            return 1
+        }
+        echo ""
+        ok "Logged in to Vercel!"
+    fi
+
+    VERCEL_USER=$($VERCEL_CMD whoami 2>/dev/null || echo "unknown")
+    ok "Logged in as: $VERCEL_USER"
+
+    # Deploy
+    echo ""
+    info "Deploying slides to Vercel..."
+    echo ""
+
+    DECK_NAME=$(basename "$DEPLOY_DIR")
+    if [[ "$CLEANUP_TEMP" == "true" ]]; then
+        DECK_NAME=$(basename "$INPUT" .html)
+    fi
+
+    # Sanitize project name
+    DECK_NAME=$(echo "$DECK_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//' | cut -c1-100)
+
+    # Rename deploy directory for Vercel
+    if [[ "$CLEANUP_TEMP" == "true" ]]; then
+        RENAMED_DIR="$(dirname "$DEPLOY_DIR")/$DECK_NAME"
+        mv "$DEPLOY_DIR" "$RENAMED_DIR"
+        DEPLOY_DIR="$RENAMED_DIR"
+    fi
+
+    DEPLOY_OUTPUT=$($VERCEL_CMD deploy "$DEPLOY_DIR" --yes --prod 2>&1) || {
+        err "Vercel deployment failed:"
+        echo "$DEPLOY_OUTPUT"
+        return 1
+    }
+
+    # Extract the URL from output
+    DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'https://[^ ]*' | tail -1)
+
+    echo ""
+    echo -e "${BOLD}════════════════════════════════════════${NC}"
+    ok "Slides deployed to Vercel!"
+    echo ""
+    echo -e "  ${BOLD}Live URL:${NC}  $DEPLOY_URL"
+    echo ""
+    echo "  This URL works on any device — phones, tablets, laptops."
+    echo "  Share it via Slack, email, text, or anywhere."
+    echo ""
+    echo -e "  ${CYAN}Tip:${NC} To take it down later, visit https://vercel.com/dashboard"
+    echo -e "       and delete the project '${DECK_NAME}'."
+    echo -e "${BOLD}════════════════════════════════════════${NC}"
+    echo ""
+
+    return 0
+}
+
+# ─── Main deployment logic ────────────────────────────────
+
+# Try Netlify first (better for users in China)
+if deploy_netlify; then
+    # Cleanup temp directory on success
+    if [[ "$CLEANUP_TEMP" == "true" ]]; then
+        rm -rf "$DEPLOY_DIR"
+    fi
+    exit 0
+fi
+
+# Netlify failed, try Vercel as fallback
+warn "Netlify deployment failed. Trying Vercel as fallback..."
 echo ""
 
-# ─── Cleanup ──────────────────────────────────────────────
+if deploy_vercel; then
+    # Cleanup temp directory on success
+    if [[ "$CLEANUP_TEMP" == "true" ]]; then
+        rm -rf "$DEPLOY_DIR"
+    fi
+    exit 0
+fi
 
+# Both failed
+err "Both Netlify and Vercel deployment failed."
+err ""
+err "Please try deploying manually:"
+err "  1. Netlify: Drag and drop your folder to https://app.netlify.com/drop"
+err "  2. Vercel: Run 'npx vercel' in your project directory"
+
+# Cleanup
 if [[ "$CLEANUP_TEMP" == "true" ]]; then
     rm -rf "$DEPLOY_DIR"
 fi
+
+exit 1
